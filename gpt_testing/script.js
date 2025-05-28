@@ -17,11 +17,42 @@ if ("geolocation" in navigator) {
 			const userLatLng = [latitude, longitude];
 
 			if (!userMarker) {
-				userMarker = L.marker(userLatLng)
+				var leafletIcon = L.icon({
+					iconUrl:
+						"https://cv-of-arman.netlify.app/arman_office.jpeg",
+					shadowUrl:
+						"https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+					iconSize: [25, 41], // size of the icon
+					shadowSize: [41, 41], // size of the shadow
+					iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+					shadowAnchor: [12, 41], // the same for the shadow
+					popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
+					tooltipAnchor: [16, -28], // point from which the tooltip should open relative to the iconAnchor
+				});
+				let bounds = L.latLngBounds(
+					L.latLng(-90, -180),
+					L.latLng(90, 180)
+				);
+				userMarker = L.marker(userLatLng, { icon: leafletIcon })
 					.addTo(map)
 					.bindPopup("You are here")
 					.openPopup();
-				map.setView(userLatLng, 15); // Zoom in on first update
+				map.setView(userLatLng, 15);
+
+				// Zoom in on first update
+				var circle = L.circle(userLatLng, {
+					color: "red",
+					fillColor: "#f03",
+					fillOpacity: 0.5,
+					radius: 10, // 1 km radius
+				}).addTo(map);
+				// var polygon = L.polygon([
+				// 	userLatLng,
+				// 	[userLatLng[0] + 0.01, userLatLng[1]],
+				// 	[userLatLng[0], userLatLng[1] + 0.01],
+				// 	[userLatLng[0] - 0.01, userLatLng[1]],
+				// ]).addTo(map);
+				// polygon.bindPopup("You are here");
 			} else {
 				userMarker.setLatLng(userLatLng);
 			}
