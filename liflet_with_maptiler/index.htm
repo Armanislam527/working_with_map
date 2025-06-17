@@ -57,16 +57,16 @@
 				popupAnchor: [1, -34],
 				shadowSize: [41, 41]
 			});
-			var leafleIcon = L.icon.extend({
-				// iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
-				// iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-				// iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-				shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
-				iconSize: [50, 100],
-				iconAnchor: [22, 90],
-				popupAnchor: [1, -34],
-				shadowSize: [41, 41]
-			});
+			// var leafleIcon = L.icon.extend({
+			// 	// iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
+			// 	// iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+			// 	// iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+			// 	shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+			// 	iconSize: [50, 100],
+			// 	iconAnchor: [22, 90],
+			// 	popupAnchor: [1, -34],
+			// 	shadowSize: [41, 41]
+			// });
 			var greenicon = L.icon({
 				iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
 				shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
@@ -84,7 +84,7 @@
 				shadowSize: [41, 41]
 			});
 			var blueicon = L.icon({
-				iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-blue.png',
+				iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png',
 				shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
 				iconSize: [50, 100],
 				iconAnchor: [22, 90],
@@ -92,20 +92,21 @@
 				shadowSize: [41, 41]
 			});
 			var yellowicon = L.icon({
-				iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-yellow.png',
+				iconUrl: 'https://cv-of-arman.netlify.app/arman_office.jpeg',
+				iconBorderRadius: 10,
 				shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
 				iconSize: [50, 100],
 				iconAnchor: [22, 90],
 				popupAnchor: [1, -34],
 				shadowSize: [41, 41]
 			});
-			var greenmarker=L.marker([userCoords.lat+0.001, userCoords.lng], { icon: greenicon }).addTo(map);
-			var redmarker=L.marker([userCoords.lat-0.001, userCoords.lng], { icon: redicon }).addTo(map);
-			var bluemarker=L.marker([userCoords.lat, userCoords.lng+0.001], { icon: blueicon }).addTo(map);
-			var yellowmarker=L.marker([userCoords.lat, userCoords.lng-0.001], { icon: yellowicon }).addTo(map);
+			var greenmarker=L.marker([userCoords.lat+0.001, userCoords.lng], { icon: greenicon }).bindPopup('green marker').openPopup().addTo(map);
+			var redmarker=L.marker([userCoords.lat-0.001, userCoords.lng], { icon: redicon }).bindPopup('red marker').openPopup().addTo(map);
+			var bluemarker=L.marker([userCoords.lat, userCoords.lng+0.001], { icon: blueicon }).bindPopup('blue marker').openPopup().addTo(map);
+			var yellowmarker=L.marker([userCoords.lat, userCoords.lng-0.001], { icon: yellowicon }).bindPopup('yellow marker').openPopup().addTo(map);
 			leafletAttribution.addTo(map);
 			// Add a marker for the user's location
-			L.marker([userCoords.lat, userCoords.lng], { icon: leafleticon }).addTo(map)
+			var marker = L.marker([userCoords.lat, userCoords.lng], { icon: leafleticon }).addTo(map)
 				.bindPopup('Your location').openPopup();
 			var circle = L.circle([userCoords.lat, userCoords.lng], {color: 'blue',fillColor: '#30f',fillOpacity: 0.5,radius: 5}).addTo(map);
 			var polygon = L.polyline([[userCoords.lat + 0.01, userCoords.lng + 0.01],[userCoords.lat + 0.01, userCoords.lng - 0.01],[userCoords.lat - 0.01, userCoords.lng - 0.01],[userCoords.lat - 0.01, userCoords.lng + 0.01],[userCoords.lat + 0.01, userCoords.lng + 0.01]],{color: 'red',weight: 1,opacity: 0.5,fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
@@ -116,8 +117,96 @@
 				L.marker([e.latlng.lat, e.latlng.lng], { icon: leafleticon }).addTo(map)
 					.bindPopup('Clicked location: ' + e.latlng.toString()).openPopup();
 			});		
-
+			// ...existing code...
+var myGeoJSON = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "1993ee25-a3b0-4b70-a0f5-e89ae4dec56d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [userCoords.lng, userCoords.lat]
+            },
+            "properties": {
+                "name": "bike parking","type": "parking","capacity": 10,"amenity": "bicycle_parking"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "c2032363-5c29-44e9-95f0-47f2f687b0fb",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [[-8.13832147, 51.50079081],[-0.13852101, 51.5006351],[-0.13893892, 51.50844924],[-0.13903939, 51.58049726],[-0.13948223, 51.50093176],[-0.13972673, 51.50083778],[-0.14002678, 51.50110366],[-0.14835472, 51.50897854],[-8.14843296, 51.50895287],[-0.14066263, 51.50100874],[-0.14090891, 51.58120813],[-8.14123318, 51.58357198],[-0.14136244, 51.50136244]
+                ]
+            },
+            "properties": {
+                "name": "way to buckingham palace"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "66a7d714-413a-4ade-aa51-fd56bb35a3d4",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[[-0.14217835, 51.50175996],[-0.14287779, 51.50166364],[-0.14213248, 51.50164426],[-0.14189141, 51.50142785],[-0.14183117, 51.50144659],[-0.14167126, 51.50130578],[-0.14173197, 51.50129071],[-0.14148893, 51.50106038],[-0.14142952, 51.50187959],[-0.14130244, 51.58896718],[-0.14161143, 51.58884373],[-0.14130274, 51.5005678],[-0.14145859, 51.5085011],[-0.14169373, 51.50072471],[-0.14213867, 51.58054356],[-0.14182342, 51.50024731],[-0.14200862, 51.50015993],[-0.14195712, 51.5001085],[-0.14235396, 51.49995592],[-0.14238332, 51.49999831],[-0.14256477, 51.49998476],[-0.1424672, 51.49988511],[-0.14237851, 51.49984588],[-0.14233348, 51.49988648],[-0.14253289, 51.49972921],[-0.14273445, 51.49992959],[-0.14267684, 51.49996191],[-0.14286826, 51.50013051],[-0.14280297, 51.500166],[-0.14285735, 51.50020438],[-0.14292956, 51.50617821],[-0.14302884, 51.50027831],[-0.14281122, 51.50035369],[-0.14287225, 51.50842184],[-0.14288884, 51.50044133],[-0.14295952, 51.5005877],[-0.14301575, 51.50057361],[-0.14313472, 51.50071754],[-0.14323337, 51.50070263],[-0.14329747, 51.5007352],[-0.14331519, 51.50078883],[-0.14324793, 51.50082905],[-0.14336017, 51.50091867],[-0.14340919, 51.5809856], [-0.14354883, 51.50113436],[-0.14361372, 51.50111066],[-0.14365346, 51.58115821],[-0.14388763, 51.50186986],[-0.14399897, 51.50116859],[-0.14365045, 51.50131133],[-0.14354995, 51.50121889],[-0.14217835, 51.50175996]
+                ]]
+            },
+            "properties": {
+                "name": "Buckingham palace"
+            }
+        }
+    ]
+}; L.geoJSON(geojson).addTo(map);L.control.scale().addTo(map);
+			// Add the GeoJSON layer to the map
+			L.geoJSON(myGeoJSON, {
+				onEachFeature: function (feature, layer) {
+					if (feature.properties && feature.properties.name) {
+						layer.bindPopup(feature.properties.name);
+					}
+				}
+			}).addTo(map);
+			// Add a scale control
+			L.control.scale({metric:true, imperial:false, position: 'topright'}).addTo(map);	
+			// L.control.watermark=L.control.extend({
+			// 	onAdd: function(map) {
+			// 		var img = L.DomUtil.create('img');
+			// 		img.src = 'https://cv-of-arman.netlify.app/arman_office.jpeg';
+			// 		img.style.width = '100px';
+			// 		img.style.height = '30px';
+			// 		img.style.position = 'absolute';
+			// 		img.style.bottom = '10px';
+			// 		img.style.right = '10px';
+			// 		return img;
+			// 	},
+			// 	onRemove: function(map) {
+			// 		// Nothing to do here
+			// 	}
+			// });L.control.watermark=function(opts) {
+			// 	return new L.control.watermark(opts);
+			// };L.control.watermark({position: 'bottomright'}).addTo(map);
+			L.Control.Watermark = L.Control.extend({
+    onAdd: function(map) {
+        var img = L.DomUtil.create('img');
+        img.src = 'https://cv-of-arman.netlify.app/arman_office.jpeg'; // Your image URL
+        img.style.width = '100px';
+        img.style.height = '30px';
+        return img;
+    },
+    onRemove: function(map) {
+        // Nothing to do here
+    }
+});
+L.control.watermark = function(opts) {
+    return new L.Control.Watermark(opts);}
+L.control.watermark({ position: 'bottomright' }).addTo(map);
+L.control.maptilerGeocoding({
+			position: 'topright',
+			placeholder: 'Search for places',
+			countrycodes: 'us,gb,ca', // Optional: restrict search to specific countries
+}).addTo(map);
 		}
+
 
     </script>
 </body>
