@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BD Train Live Location Simulator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@6.19.0/dist/maplibre-gl.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "maplibre-gl": "https://cdn.jsdelivr.net/npm/maplibre-gl@6.19.0/dist/maplibre-gl.mjs"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <aside id="panel">
+      <h1>BD Train Simulator</h1>
+
+      <section>
+        <h2>Basemap</h2>
+        <select id="basemap-select"></select>
+      </section>
+
+      <section>
+        <h2>Overlays</h2>
+        <div id="overlay-list"></div>
+      </section>
+
+      <section>
+        <h2>Simulation</h2>
+        <div class="sim-controls">
+          <button id="sim-toggle" class="btn primary">Pause all</button>
+          <label class="slider-label">
+            Speed <span id="sim-speed-value">10</span>x
+            <input id="sim-speed" type="range" min="1" max="120" value="10" />
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Trains</h2>
+        <div class="add-train">
+          <select id="route-select"></select>
+          <button id="add-train" class="btn">Add train</button>
+        </div>
+        <ul id="train-list" class="train-list"></ul>
+      </section>
+
+      <section>
+        <h2>Draw custom route</h2>
+        <div id="draw-controls">
+          <button id="draw-toggle" class="btn">Start drawing</button>
+          <div id="draw-actions" hidden>
+            <button id="draw-undo" class="btn small">Undo</button>
+            <button id="draw-finish" class="btn small primary">Finish</button>
+            <button id="draw-cancel" class="btn small">Cancel</button>
+          </div>
+        </div>
+        <p id="draw-hint" class="hint" hidden>Click on the map to add waypoints.</p>
+      </section>
+
+      <footer>
+        <p class="attribution">
+          Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>
+          contributors. OpenFreeMap &copy; OpenMapTiles. Railway data &copy;
+          <a href="https://www.openrailwaymap.org/" target="_blank" rel="noopener">OpenRailwayMap</a>.
+          Esri basemaps &copy; Esri, HERE, Garmin, USGS, EPA.
+        </p>
+      </footer>
+    </aside>
+    <div id="map"></div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
